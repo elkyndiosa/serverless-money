@@ -1,0 +1,64 @@
+service: serverless-money
+package:
+  individually: true
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+  architecture: arm64
+  stage: ${opt:stage, 'local'}
+  timeout: 1
+  environment:
+  tracing:
+    apiGateway: true
+    lambda: true
+  deploymentBucket:
+    name: ${opt:bucket}
+  iam:
+    role:
+      statements:
+        - Effect: 'Allow'
+          Action:
+            - xray:PutTelemetryRecords
+            - xray:PutTraceSegments
+          Resource: '*'
+custom:
+  serverless-layers:
+    - common:
+      dependenciesPath: ./package.json
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+    packager: 'npm'
+    excludeFiles: src/**/*.test.[t|j]s
+  dynamodb:
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+      convertEmptyValues: true
+      dbPath: "./.dynamodb"
+    stages:
+      - local
+  warmup:
+    enabled: true
+    events:
+      - schedule: rate(5 minutes)
+    prewarm: true
+    concurrency: 1
+  prune:
+    automatic: true
+    number: 5
+  serverless-offline:
+    httpPort: 4000
+functions: ${file(./yml/functions.yml)}
+resources:
+plugins:
+  - serverless-layers
+  - serverless-webpack
+  - serverless-dynamodb-local
+  - serverless-offline
+  - serverless-plugin-warmup
+  - serverless-dotenv-plugin
+  - serverless-iam-roles-per-function
