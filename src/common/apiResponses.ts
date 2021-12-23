@@ -33,7 +33,7 @@ function apiResponse({ json, statusCode, allowCORS = true }: ResponseOptions): R
 export function errorResponse(json: JSON): Response {
   return apiResponse({
     json,
-    statusCode: 500,
+    statusCode: json.statusCode || 500,
   });
 }
 export function corsErrorResponse(json: JSON): Response {

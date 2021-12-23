@@ -21,6 +21,7 @@
                 "type": "number"
               }
             },
+            "additionalProperties": false,
             "required": [
               "name",
               "email"
