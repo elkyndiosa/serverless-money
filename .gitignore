@@ -7,3 +7,5 @@ coverage
 .serverless
 .env
 .dynamodb
+data
+./data

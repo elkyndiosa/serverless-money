@@ -1,0 +1,11 @@
+createdUser:
+  handler: src/functions/user.create
+  iamRoleStatementsInherit: true
+  events:         
+    - http:
+        path: /users
+        method: post
+        cors: true
+        request:
+          schema:
+            application/json: ${file(src/squemes/user.squema.json)}

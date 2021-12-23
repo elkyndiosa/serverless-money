@@ -52,7 +52,7 @@ custom:
     number: 5
   serverless-offline:
     httpPort: 4000
-functions: ${file(./yml/functions.yml)}
+functions: ${file(./infra/functions.yml)}
 resources:
 plugins:
   - serverless-layers

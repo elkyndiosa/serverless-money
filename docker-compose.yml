@@ -1,13 +1,13 @@
 version: '3'
 services:
-  mongo:
-    image: mongo
-    container_name: mongodb
+  mysql:
+    platform: linux/x86_64
+    image: mysql
+    container_name: mysql
     environment:
-      - MONGO_INITDB_DATABASE=wallet
-      - MONGO_INITDB_ROOT_USERNAME=mongodb
-      - MONGO_INITDB_ROOT_PASSWORD=mongodb
+      - MYSQL_ROOT_PASSWORD=pass
+      - MYSQL_DATABASE=wallet
     ports:
-      - '27017:27017'
+      - '3306:3306'
     volumes:
-      - './data:/data/db'
+      - './data:/var/lib/mysql'
