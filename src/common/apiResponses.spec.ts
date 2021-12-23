@@ -34,7 +34,6 @@ describe('Responses apis with status', () => {
     expect(typeof resp.body).toBe('string');
     expect(resp.headers['Content-Type']).toBe('application/json');
     expect(resp.headers['Access-Control-Allow-Origin']).toBe('*');
-    expect(resp.allowCORS).toBe(true);
   });
   test('corsErrorResponse - Validate that the api response returns the desired object', () => {
     const resp = corsErrorResponse({ name: 'elkyn diosa' });
@@ -42,6 +41,5 @@ describe('Responses apis with status', () => {
     expect(typeof resp.body).toBe('string');
     expect(resp.headers['Content-Type']).toBe('application/json');
     expect(resp.headers['Access-Control-Allow-Origin']).toBe('*');
-    expect(resp.allowCORS).toBe(true);
   });
 });

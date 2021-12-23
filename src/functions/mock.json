@@ -1,0 +1,15 @@
+{
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": 
+    {
+      "data": {
+        "type": "user",
+        "attributes": {
+            "name": "Elkyn diosa",
+            "email": "elkyndiosa@gmail.com"
+        }
+      }
+    }
+  }

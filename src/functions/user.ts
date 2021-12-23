@@ -7,7 +7,9 @@ import { createUser, checkUser } from '@src/repositories/user.repository';
 
 export const create = async (event: APIGatewayProxyEvent): Promise<Response> => {
   const isString = typeof event.body === 'string';
+
   const body: UserType = isString ? JSON.parse(event.body) : event.body;
+  console.log(body);
   const { attributes } = body.data;
   try {
     const existUser = await checkUser(attributes.email);
