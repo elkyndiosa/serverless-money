@@ -9,3 +9,13 @@ export type UserType = {
     attributes: UserAttributeType;
   };
 };
+export type UserIncreaseBalanceAttributeType = {
+  userId: number;
+  value: number;
+};
+export type UserIncreaseBalanceType = {
+  data: {
+    type: string;
+    attributes: UserIncreaseBalanceAttributeType;
+  };
+};

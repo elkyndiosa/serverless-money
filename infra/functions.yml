@@ -21,3 +21,15 @@ createdOrder:
         request:
           schema:
             application/json: ${file(src/squemes/order.squema.json)}
+
+increaseBalance:
+  handler: src/functions/user/handler.increaseBalence
+  iamRoleStatementsInherit: true
+  events:         
+    - http:
+        path: /users/icnrease-balance
+        method: post
+        cors: true
+        request:
+          schema:
+            application/json: ${file(src/squemes/userIncrease.squema.json)}

@@ -4,7 +4,7 @@ import { errorResponse, Response, successResponse } from 'src/common/apiResponse
 import { APIGatewayProxyEvent } from 'aws-lambda';
 import { checkProduct, createOrder } from '@src/repositories/order.repository';
 import { OrderType } from '@src/structures/order.type';
-import { checkUser, checkUserHasMoney, updateBalanceUser } from '@src/repositories/user.repository';
+import { checkUser, checkUserHasMoney, decreaseBalenceOfUser } from '@src/repositories/user.repository';
 
 export const create = async (event: APIGatewayProxyEvent): Promise<Response> => {
   const isString = typeof event.body === 'string';
@@ -30,7 +30,7 @@ export const create = async (event: APIGatewayProxyEvent): Promise<Response> => 
     }
 
     const order = await createOrder(attributes);
-    await updateBalanceUser(order.total, order.userId);
+    await decreaseBalenceOfUser(order.total, order.userId);
     order.total = parseInt(order.total);
 
     return successResponse({
