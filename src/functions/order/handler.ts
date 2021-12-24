@@ -23,16 +23,19 @@ export const create = async (event: APIGatewayProxyEvent): Promise<Response> => 
         statusCode: 400,
       });
     }
+
     const order = await createOrder(attributes);
+    order.total = parseInt(order.total);
+
     return successResponse({
-      message: `User Created Successfully!`,
-      order,
+      message: `Order Created Successfully!`,
+      order: { ...order, products: attributes.products },
     });
   } catch (error) {
     console.error(error);
 
     return errorResponse({
-      message: `Sorry, there was an error creating the user!`,
+      message: `Sorry, there was an error creating the order!`,
       error,
     });
   }

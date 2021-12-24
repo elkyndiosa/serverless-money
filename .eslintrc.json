@@ -20,6 +20,7 @@
     "prefer-arrow-callback": "off",
     "no-multiple-empty-lines": ["error", { "max": 1, "maxBOF": 0, "maxEOF": 0 }],
     "no-console": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "radix": "off"
   }
 }

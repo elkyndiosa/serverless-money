@@ -5,10 +5,22 @@
     "body": 
     {
       "data": {
-        "type": "user",
+        "type": "order",
         "attributes": {
-            "name": "Elkyn diosa",
-            "email": "elkyndiosa@gmail.com"
+          "userId": 2,
+          "products": [
+              {
+                  "id": 2,
+                  "price": 22000,
+                  "quantity": 3
+              },
+              {
+                  "id": 1,
+                  "price": 30000,
+                  "quantity": 2
+              }
+          ],
+          "total": 126000
         }
       }
     }

@@ -14,7 +14,13 @@ describe('Validating entity User', () => {
     const body = JSON.parse(resp.body);
     expect(body).toEqual({
       message: `User Created Successfully!`,
-      user: { ...mock.body.data.attributes, balance: 0, id: expect.any(Number) },
+      user: {
+        ...mock.body.data.attributes,
+        balance: 0,
+        id: expect.any(Number),
+        createdAt: expect.any(String),
+        updatedAt: expect.any(String),
+      },
     });
   });
   test('Creation of resource existing', async () => {
