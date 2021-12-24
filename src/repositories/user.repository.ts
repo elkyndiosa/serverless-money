@@ -5,6 +5,10 @@ type DataSearch = {
   email?: string;
   id?: number;
 };
+type CheckUserHasMoneyType = {
+  id: number;
+  money: number;
+};
 export const createUser = async (user: UserAttributeType): Promise<UserAttributeType> => {
   const prisma = await getPrisma();
   try {
@@ -55,7 +59,6 @@ export const updateBalanceUser = async (balanceToIncrease: number, id: number): 
         },
       },
     });
-    console.log('userUpdated', userUpdated);
 
     await prisma.$disconnect();
 
@@ -64,5 +67,22 @@ export const updateBalanceUser = async (balanceToIncrease: number, id: number): 
     console.error(error);
     await prisma.$disconnect();
     throw new Error('Exception to check user');
+  }
+};
+export const checkUserHasMoney = async (data: CheckUserHasMoneyType): Promise<boolean> => {
+  const prisma = await getPrisma();
+  const { id, money } = data;
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id },
+    });
+
+    await prisma.$disconnect();
+
+    return user.balance >= money;
+  } catch (error) {
+    console.error(error);
+    await prisma.$disconnect();
+    throw new Error('Exception to check balance of user');
   }
 };

@@ -4,7 +4,7 @@ import { errorResponse, Response, successResponse } from 'src/common/apiResponse
 import { APIGatewayProxyEvent } from 'aws-lambda';
 import { checkProduct, createOrder } from '@src/repositories/order.repository';
 import { OrderType } from '@src/structures/order.type';
-import { checkUser, updateBalanceUser } from '@src/repositories/user.repository';
+import { checkUser, checkUserHasMoney, updateBalanceUser } from '@src/repositories/user.repository';
 
 export const create = async (event: APIGatewayProxyEvent): Promise<Response> => {
   const isString = typeof event.body === 'string';
@@ -13,7 +13,12 @@ export const create = async (event: APIGatewayProxyEvent): Promise<Response> => 
 
   try {
     const existUser = await checkUser({ id: attributes.userId });
-
+    const userHasMoney = await checkUserHasMoney({ id: attributes.userId, money: attributes.total });
+    if (!userHasMoney)
+      return errorResponse({
+        message: `Sorry, usurio does not have the necessary money!`,
+        statusCode: 400,
+      });
     const existProduct = await checkProduct(attributes.products);
 
     if (!existUser || !existProduct) {
