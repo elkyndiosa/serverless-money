@@ -4,16 +4,20 @@ This project has been generated using the `aws-nodejs-typescript` template from 
 
 For detailed instructions, please refer to the [documentation](https://www.serverless.com/framework/docs/providers/aws/).
 
+## Endpoints documentations
+
+https://documenter.getpostman.com/view/12147069/UVREiito
 ## Installation/deployment instructions
 
 Depending on your preferred package manager, follow the instructions below to deploy your project.
 
 > **Requirements**: NodeJS `lts/fermium (v.14.15.0)`. If you are using [nvm](https://github.com/nvm-sh/nvm), run `nvm use` to make sure you are using the same version of Node locally and in your lambda runtime.
+> **DataBase**: Para este pequeno sistema se creo una imagen docker para implementar la persistencia de los datos y para su funcopnamiento debe tener instalado en su sistema `Docker and Docker Compose` y en la raiz del proyecto ejecutar `docker-compose build` y luego `docker-compose up`.
 
+Como ORM se utiliza `prisma`, por lo tanto debe ejecutar `npx prisma generate`, `npx prisma migrate dev --name init`, `npx prisma db seed`
 ### Using NPM
 
 - Run `npm i` to install the project dependencies.
-- Run `npm i dynamodb-onetable` to install onetable. https://github.com/sensedeep/dynamodb-onetable
 - Run `npx sls deploy` to deploy this stack to AWS
 
 ### Using Yarn
@@ -42,7 +46,6 @@ To test locally, run the following command:
 ### Third-party libraries
 
 - j[son-schema-to-ts](https://github.com/ThomasAribart/json-schema-to-ts) - uses the JSON-Schema definitions used by API Gateway for HTTP request validation to statically generate TypeScript types in your lambda handler codebase.
-- [middy](https://github.com/middyjs/middy) - middleware engine for Node.Js lambda. This template uses [http-json-body-parser](https://github.com/middyjs/middy/tree/master/packages/http-json-body-parser) to convert the `event.body` property of the Gateway API, originally passed as a chained JSON, to its corresponding parsed object
 - [@serverless/typescript](https://github.com/serverless/typescript) - provides updated TypeScript definitions for your `serverless.ts` service file.
 - [aws-xray-sdk](https://www.npmjs.com/package/aws-xray-sdk) - The AWS X-Ray SDK automatically records information for incoming and outgoing requests and responses (via middleware), as well as local data such as function calls, time, variables (via metadata and annotations), even EC2 instance data (via plugins).
 - [mongoid-js](https://www.npmjs.com/package/aws-xray-sdk) - Generates unique id strings. The ids are constructed like MongoDB document ids, built out of a timestamp, system id, process id and sequence number. Similar to BSON.ObjectID(), but at 12 million ids / sec, 35 x faster. Example for get data for id generated:
