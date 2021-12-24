@@ -1,6 +1,6 @@
 import { isApiGatewayResponse } from '@src/testUtils/validators';
 import { eventGenerator } from '@src/testUtils/eventGenerator';
-import { create } from './user';
+import { create } from './handler';
 import mock = require('./mock.json');
 
 describe('Validating entity User', () => {

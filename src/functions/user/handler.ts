@@ -10,7 +10,7 @@ export const create = async (event: APIGatewayProxyEvent): Promise<Response> => 
   const body: UserType = isString ? JSON.parse(event.body) : event.body;
   const { attributes } = body.data;
   try {
-    const existUser = await checkUser(attributes.email);
+    const existUser = await checkUser({ email: attributes.email });
     if (existUser)
       return errorResponse({
         message: `Sorry, User already exists!`,

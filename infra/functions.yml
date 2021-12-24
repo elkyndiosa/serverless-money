@@ -1,5 +1,5 @@
 createdUser:
-  handler: src/functions/user.create
+  handler: src/functions/user/handler.create
   iamRoleStatementsInherit: true
   events:         
     - http:
@@ -9,3 +9,15 @@ createdUser:
         request:
           schema:
             application/json: ${file(src/squemes/user.squema.json)}
+
+createdOrder:
+  handler: src/functions/order/handler.create
+  iamRoleStatementsInherit: true
+  events:         
+    - http:
+        path: /orders
+        method: post
+        cors: true
+        request:
+          schema:
+            application/json: ${file(src/squemes/order.squema.json)}
