@@ -22,16 +22,30 @@ describe('Validating entity Order', () => {
       },
     });
   });
-  // test('Creation of resource existing', async () => {
-  //   const event = eventGenerator(mock);
-  //   const resp = await create(event);
-  //   expect(resp.statusCode).toBe(400);
-  //   expect(resp).toBeDefined();
-  //   expect(isApiGatewayResponse(resp)).toBe(true);
-  //   const body = JSON.parse(resp.body);
-  //   expect(body).toEqual({
-  //     message: `Sorry, User already exists!`,
-  //     statusCode: 400,
-  //   });
-  // });
+  test('Creation of resource use not existing', async () => {
+    mock.body.data.attributes.userId = 212;
+    const event = eventGenerator(mock);
+    const resp = await create(event);
+    expect(resp.statusCode).toBe(400);
+    expect(resp).toBeDefined();
+    expect(isApiGatewayResponse(resp)).toBe(true);
+    const body = JSON.parse(resp.body);
+    expect(body).toEqual({
+      message: `Sorry, User not found!`,
+      statusCode: 400,
+    });
+  });
+  test('Creation of resource use not existing', async () => {
+    mock.body.data.attributes.products[0].id = 212;
+    const event = eventGenerator(mock);
+    const resp = await create(event);
+    expect(resp.statusCode).toBe(400);
+    expect(resp).toBeDefined();
+    expect(isApiGatewayResponse(resp)).toBe(true);
+    const body = JSON.parse(resp.body);
+    expect(body).toEqual({
+      message: `Sorry, User not found!`,
+      statusCode: 400,
+    });
+  });
 });

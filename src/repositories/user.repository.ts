@@ -40,3 +40,29 @@ export const checkUser = async (data: DataSearch): Promise<boolean> => {
     throw new Error('Exception to check user');
   }
 };
+export const updateBalanceUser = async (balanceToIncrease: number, id: number): Promise<UserAttributeType> => {
+  const prisma = await getPrisma();
+  id = parseInt(id.toString());
+  balanceToIncrease = parseInt(balanceToIncrease.toString());
+  console.log(balanceToIncrease, id);
+  console.log(typeof balanceToIncrease, typeof id);
+  try {
+    const userUpdated = await prisma.user.update({
+      where: { id },
+      data: {
+        balance: {
+          decrement: balanceToIncrease,
+        },
+      },
+    });
+    console.log('userUpdated', userUpdated);
+
+    await prisma.$disconnect();
+
+    return userUpdated;
+  } catch (error) {
+    console.error(error);
+    await prisma.$disconnect();
+    throw new Error('Exception to check user');
+  }
+};
