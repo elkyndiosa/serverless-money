@@ -36,6 +36,7 @@ export const eventGenerator = ({ body }) => {
         claims: undefined,
         scopes: undefined,
         principalId: 'offlineContext_authorizer_principalId',
+        userId: '2',
       },
       domainName: 'offlineContext_domainName',
       domainPrefix: 'offlineContext_domainPrefix',

@@ -67,7 +67,9 @@ export const transfer = async (event: APIGatewayProxyEvent): Promise<Response> =
   const isString = typeof event.body === 'string';
   const body: UserIncreaseBalanceType = isString ? JSON.parse(event.body) : event.body;
   const { attributes } = body.data;
+
   const userIdSource = parseInt(event.requestContext.authorizer.userId);
+
   try {
     const existUser = await checkUser({ id: attributes.userId });
 

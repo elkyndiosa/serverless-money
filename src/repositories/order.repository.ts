@@ -1,4 +1,4 @@
-import { getPrisma } from '@libs/prisma';
+import prisma from '@libs/prisma';
 import { OrderAttributeType } from '@src/structures/order.type';
 import { PorductAttributeType } from '@src/structures/product.type';
 
@@ -10,7 +10,7 @@ const calculateTotal = (products: PorductAttributeType[]): number => {
   return total;
 };
 export const createOrder = async (order: OrderAttributeType): Promise<any> => {
-  const prisma = await getPrisma();
+  // const prisma = await getPrisma();
   try {
     const newOrder = await prisma.order.create({
       data: {
@@ -40,7 +40,7 @@ export const createOrder = async (order: OrderAttributeType): Promise<any> => {
   }
 };
 export const checkProduct = async (products: PorductAttributeType[]): Promise<boolean> => {
-  const prisma = await getPrisma();
+  // const prisma = await getPrisma();
   let response: boolean = true;
   try {
     await Promise.all(

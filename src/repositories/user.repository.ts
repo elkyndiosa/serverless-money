@@ -1,4 +1,4 @@
-import { getPrisma } from '@libs/prisma';
+import prisma from '@libs/prisma';
 import { UserAttributeType } from '@src/structures/user.type';
 
 type DataSearch = {
@@ -10,7 +10,7 @@ type CheckUserHasMoneyType = {
   money: number;
 };
 export const createUser = async (user: UserAttributeType): Promise<UserAttributeType> => {
-  const prisma = await getPrisma();
+  // const prisma = await getPrisma();
   try {
     const newUser = await prisma.user.create({
       data: {
@@ -28,7 +28,7 @@ export const createUser = async (user: UserAttributeType): Promise<UserAttribute
 };
 export const checkUser = async (data: DataSearch): Promise<boolean> => {
   const { email, id } = data;
-  const prisma = await getPrisma();
+  // const prisma = await getPrisma();
   try {
     const user = await prisma.user.findMany({
       where: {
@@ -45,7 +45,7 @@ export const checkUser = async (data: DataSearch): Promise<boolean> => {
   }
 };
 export const decreaseBalenceOfUser = async (balanceToDecrease: number, id: number): Promise<UserAttributeType> => {
-  const prisma = await getPrisma();
+  // const prisma = await getPrisma();
   id = parseInt(id.toString());
   balanceToDecrease = parseInt(balanceToDecrease.toString());
   try {
@@ -68,7 +68,7 @@ export const decreaseBalenceOfUser = async (balanceToDecrease: number, id: numbe
   }
 };
 export const checkUserHasMoney = async (data: CheckUserHasMoneyType): Promise<boolean> => {
-  const prisma = await getPrisma();
+  // const prisma = await getPrisma();
   const { id, money } = data;
   try {
     const user = await prisma.user.findUnique({
@@ -85,7 +85,7 @@ export const checkUserHasMoney = async (data: CheckUserHasMoneyType): Promise<bo
   }
 };
 export const increaseBalenceOfUser = async (id: number, balanceToIncrease: number): Promise<UserAttributeType> => {
-  const prisma = await getPrisma();
+  // const prisma = await getPrisma();
   id = parseInt(id.toString());
   balanceToIncrease = parseInt(balanceToIncrease.toString());
   try {
