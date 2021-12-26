@@ -16,7 +16,10 @@ const generatePolicy = (data): AuthPolicy => {
     },
     context: {
       platformRoles: 'Login User',
-      userId: token,
+      userId: '2',
+      // aqui podria buscar el id del usuario relacionado al token pero en
+      // este punto no tenemos alguna validacion de usuario con cognito o algo asi,
+      // por lo que se pone un id quemado
     },
   };
 };

@@ -8,7 +8,7 @@ createdUser:
         cors: true
         request:
           schema:
-            application/json: ${file(src/squemes/user.squema.json)}
+            application/json: ${file(src/schemes/user.scheme.json)}
         authorizer: authorizerFunc
 createdOrder:
   handler: src/functions/order/handler.create
@@ -20,7 +20,7 @@ createdOrder:
         cors: true
         request:
           schema:
-            application/json: ${file(src/squemes/order.squema.json)}
+            application/json: ${file(src/schemes/order.scheme.json)}
         authorizer: authorizerFunc
 increaseBalance:
   handler: src/functions/user/handler.increaseBalence
@@ -32,7 +32,19 @@ increaseBalance:
         cors: true
         request:
           schema:
-            application/json: ${file(src/squemes/userIncrease.squema.json)}
+            application/json: ${file(src/schemes/userIncrease.scheme.json)}
+        authorizer: authorizerFunc
+transfer:
+  handler: src/functions/user/handler.transfer
+  iamRoleStatementsInherit: true
+  events:         
+    - http:
+        path: /users/transfer
+        method: post
+        cors: true
+        request:
+          schema:
+            application/json: ${file(src/schemes/userIncrease.scheme.json)}
         authorizer: authorizerFunc
 authorizerFunc:
   handler: src/authorizer/auth.authorizerFunc
