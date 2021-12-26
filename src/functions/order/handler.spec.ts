@@ -1,10 +1,16 @@
 import { isApiGatewayResponse } from '@src/testUtils/validators';
 import { eventGenerator } from '@src/testUtils/eventGenerator';
+import { increaseBalence } from '@functions/user/handler';
 import { create } from './handler';
 import mock = require('./mock.json');
+import mockBalance = require('../user/mockBalance.json');
 
 describe('Validating entity Order', () => {
   test('Creation of resource', async () => {
+    // Increase balance of user
+    const eventBalance = eventGenerator(mockBalance);
+    await increaseBalence(eventBalance);
+
     const event = eventGenerator(mock);
     const resp = await create(event);
     expect(resp.statusCode).toBe(200);

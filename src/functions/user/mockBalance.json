@@ -1,0 +1,15 @@
+{
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": 
+    {
+      "data": {
+        "type": "user",
+        "attributes": {
+            "userId": 2,
+            "value": 10000000
+        }
+      }
+    }
+  }

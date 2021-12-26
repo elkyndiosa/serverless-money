@@ -34,8 +34,10 @@ export const increaseBalence = async (event: APIGatewayProxyEvent): Promise<Resp
   const isString = typeof event.body === 'string';
   const body: UserIncreaseBalanceType = isString ? JSON.parse(event.body) : event.body;
   const { attributes } = body.data;
+
   try {
     const existUser = await checkUser({ id: attributes.userId });
+
     if (!existUser)
       return errorResponse({
         message: `Sorry, User not found!`,

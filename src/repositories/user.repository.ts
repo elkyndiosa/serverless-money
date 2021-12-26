@@ -48,8 +48,6 @@ export const decreaseBalenceOfUser = async (balanceToDecrease: number, id: numbe
   const prisma = await getPrisma();
   id = parseInt(id.toString());
   balanceToDecrease = parseInt(balanceToDecrease.toString());
-  console.log(balanceToDecrease, id);
-  console.log(typeof balanceToDecrease, typeof id);
   try {
     const userUpdated = await prisma.user.update({
       where: { id },

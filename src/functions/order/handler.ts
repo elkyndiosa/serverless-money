@@ -13,12 +13,7 @@ export const create = async (event: APIGatewayProxyEvent): Promise<Response> => 
 
   try {
     const existUser = await checkUser({ id: attributes.userId });
-    const userHasMoney = await checkUserHasMoney({ id: attributes.userId, money: attributes.total });
-    if (!userHasMoney)
-      return errorResponse({
-        message: `Sorry, usurio does not have the necessary money!`,
-        statusCode: 400,
-      });
+
     const existProduct = await checkProduct(attributes.products);
 
     if (!existUser || !existProduct) {
@@ -28,7 +23,12 @@ export const create = async (event: APIGatewayProxyEvent): Promise<Response> => 
         statusCode: 400,
       });
     }
-
+    const userHasMoney = await checkUserHasMoney({ id: attributes.userId, money: attributes.total });
+    if (!userHasMoney)
+      return errorResponse({
+        message: `Sorry, usurio does not have the necessary money!`,
+        statusCode: 400,
+      });
     const order = await createOrder(attributes);
     await decreaseBalenceOfUser(order.total, order.userId);
     order.total = parseInt(order.total);

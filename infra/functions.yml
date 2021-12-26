@@ -9,7 +9,7 @@ createdUser:
         request:
           schema:
             application/json: ${file(src/squemes/user.squema.json)}
-
+        authorizer: authorizerFunc
 createdOrder:
   handler: src/functions/order/handler.create
   iamRoleStatementsInherit: true
@@ -21,7 +21,7 @@ createdOrder:
         request:
           schema:
             application/json: ${file(src/squemes/order.squema.json)}
-
+        authorizer: authorizerFunc
 increaseBalance:
   handler: src/functions/user/handler.increaseBalence
   iamRoleStatementsInherit: true
@@ -33,3 +33,6 @@ increaseBalance:
         request:
           schema:
             application/json: ${file(src/squemes/userIncrease.squema.json)}
+        authorizer: authorizerFunc
+authorizerFunc:
+  handler: src/authorizer/auth.authorizerFunc

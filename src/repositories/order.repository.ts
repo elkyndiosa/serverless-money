@@ -40,8 +40,6 @@ export const createOrder = async (order: OrderAttributeType): Promise<any> => {
   }
 };
 export const checkProduct = async (products: PorductAttributeType[]): Promise<boolean> => {
-  console.log('PRODUCTS ', products);
-
   const prisma = await getPrisma();
   let response: boolean = true;
   try {
@@ -52,7 +50,6 @@ export const checkProduct = async (products: PorductAttributeType[]): Promise<bo
             id: product.id,
           },
         });
-        console.log('existProduct', existProduct);
 
         if (!existProduct) response = false;
       }),
